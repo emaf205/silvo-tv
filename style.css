@@ -1,23 +1,15 @@
 /* ==========================================================================
-   SILVO TV - STYLESHEET (VINTAGE CRT TELEVISION EXPERIENCE)
+   SILVO TV - MINIMAL & CLEAN VINTAGE TELEVISION
+   Solo TV, Freccia per Cambiare (Solo Avanti), Titolo e Crediti.
    ========================================================================== */
 
 :root {
-  --tv-bg-dark: #121316;
-  --tv-chassis-main: #202227;
-  --tv-chassis-accent: #17181c;
-  --tv-wood-grain: #3d2417;
-  --tv-wood-dark: #22140d;
-  --tv-gold: #d4af37;
-  --tv-gold-light: #f7e28b;
-  --tv-chrome: #c5cbd3;
-  --tv-screen-glass: #0a110d;
-  --tv-led-red: #ff2a2a;
-  --tv-led-green: #00ff66;
+  --tv-frame: #1e2025;
+  --tv-bezel: #121316;
+  --tv-accent: #ffcc00;
+  --tv-accent-hover: #ffe066;
   --tv-osd-green: #39ff14;
-  --tv-osd-amber: #ffb000;
-  --tv-osd-blue: #00e5ff;
-  --tv-bezel-shadow: inset 0 0 40px rgba(0, 0, 0, 0.95);
+  --tv-text-dim: #9da3af;
 }
 
 * {
@@ -28,7 +20,7 @@
 }
 
 body {
-  background: radial-gradient(circle at 50% 30%, #1f2229 0%, #0d0e12 70%, #050608 100%);
+  background: radial-gradient(circle at 50% 35%, #18191f 0%, #0a0b0d 100%);
   color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
@@ -36,239 +28,143 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 24px 16px;
   overflow-x: hidden;
-  padding: 20px 10px;
   user-select: none;
 }
 
-/* Retro Room Wallpaper ambience */
-.room-backdrop {
+/* Ambient backlight behind the TV */
+.ambient-glow {
   position: fixed;
-  inset: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 32px 32px;
+  width: 750px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(57, 255, 20, 0.08) 0%, rgba(255, 204, 0, 0.05) 50%, transparent 80%);
+  filter: blur(80px);
   pointer-events: none;
   z-index: 0;
 }
 
-.ambient-glow {
-  position: fixed;
-  width: 700px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(57, 255, 20, 0.08) 0%, rgba(0, 100, 255, 0.05) 50%, transparent 80%);
-  filter: blur(60px);
-  pointer-events: none;
-  z-index: 1;
-  transition: opacity 0.8s ease;
-  opacity: 0.3;
-}
-
-body.tv-on .ambient-glow {
-  opacity: 0.85;
-}
-
-/* Main Container: TV + Optional Remote */
-.app-container {
+.tv-wrapper {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 32px;
-  max-width: 1300px;
   width: 100%;
+  max-width: 920px;
 }
 
 /* ==========================================================================
-   TV CHASSIS (MIVAR / TELEMILANO 58 AESTHETIC)
+   TELEVISORE PULITO
    ========================================================================== */
 
-.tv-chassis {
+.retro-tv {
   position: relative;
-  background: linear-gradient(145deg, #2a2d34 0%, #1c1e23 60%, #131417 100%);
-  border-radius: 36px;
-  padding: 30px;
+  width: 100%;
+  background: linear-gradient(145deg, #282a30 0%, #1a1c20 100%);
+  border-radius: 28px;
+  padding: 20px 20px 16px 20px;
+  border: 3px solid #383c46;
   box-shadow: 
-    0 30px 80px rgba(0, 0, 0, 0.9),
-    0 10px 30px rgba(0, 0, 0, 0.8),
-    inset 0 2px 4px rgba(255, 255, 255, 0.2),
-    inset 0 -4px 8px rgba(0, 0, 0, 0.8);
-  border: 4px solid #363a42;
-  display: flex;
-  flex-direction: column;
-  width: 960px;
-  max-width: 95vw;
-  transition: transform 0.2s ease;
+    0 25px 60px rgba(0, 0, 0, 0.85),
+    inset 0 2px 3px rgba(255, 255, 255, 0.15),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.7);
 }
 
-/* Top Antenna & Vent details */
-.tv-antenna-wrapper {
+/* Antenne sopra la TV */
+.tv-antenna {
   position: absolute;
-  top: -45px;
+  top: -36px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 50px;
+  gap: 40px;
   pointer-events: none;
 }
 
-.antenna-left, .antenna-right {
-  width: 6px;
-  height: 55px;
-  background: linear-gradient(to top, #666, #aaa, #ddd);
-  border-radius: 4px 4px 0 0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  position: relative;
+.tv-antenna .ant {
+  width: 4px;
+  height: 44px;
+  background: linear-gradient(to top, #555, #bbb);
+  border-radius: 3px;
+  display: block;
 }
 
-.antenna-left {
-  transform: rotate(-35deg);
+.tv-antenna .ant-l {
+  transform: rotate(-30deg);
   transform-origin: bottom center;
 }
 
-.antenna-right {
-  transform: rotate(35deg);
+.tv-antenna .ant-r {
+  transform: rotate(30deg);
   transform-origin: bottom center;
 }
 
-.antenna-left::after, .antenna-right::after {
+.tv-antenna .ant::after {
   content: "";
-  position: absolute;
-  top: -6px;
-  left: -3px;
-  width: 12px;
-  height: 12px;
+  display: block;
+  width: 8px;
+  height: 8px;
   background: #eee;
   border-radius: 50%;
-  box-shadow: 0 0 6px #fff;
-}
-
-/* TV Main Body Split: Screen on left, physical controls on right */
-.tv-body {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  align-items: stretch;
-}
-
-/* ==========================================================================
-   CRT SCREEN HOUSING & GLASS BULGE
-   ========================================================================== */
-
-.screen-housing {
   position: relative;
-  flex: 1;
-  background: #0d0f11;
-  border-radius: 28px;
-  padding: 14px;
-  box-shadow: 
-    inset 0 4px 15px rgba(0, 0, 0, 0.95),
-    inset 0 -2px 6px rgba(255, 255, 255, 0.08),
-    0 2px 5px rgba(0, 0, 0, 0.5);
-  border: 3px solid #1a1b1f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: -4px;
+  left: -2px;
 }
 
-.crt-screen {
+/* Cornice dello Schermo */
+.tv-bezel {
+  background: #0d0e11;
+  border-radius: 20px;
+  padding: 10px;
+  border: 2px solid #1c1d22;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.tv-screen {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  background: var(--tv-screen-glass);
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 
-    inset 0 0 60px rgba(0, 0, 0, 0.9),
-    inset 0 0 120px rgba(0, 0, 0, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.05);
-}
-
-/* CRT Screen Bulb Reflection Curvature */
-.crt-screen::before {
-  content: " ";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(ellipse at 50% 50%, transparent 65%, rgba(0, 0, 0, 0.6) 100%);
-  pointer-events: none;
-  z-index: 10;
-}
-
-/* Corner Glass Light Reflection */
-.crt-screen::after {
-  content: " ";
-  position: absolute;
-  top: 6px;
-  left: 12px;
-  width: 38%;
-  height: 25%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
-  border-radius: 50% 20% 50% 10%;
-  pointer-events: none;
-  z-index: 12;
-}
-
-/* Scanline lines overlay */
-.scanlines {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.35) 50%
-  ), linear-gradient(
-    90deg,
-    rgba(255, 0, 0, 0.03),
-    rgba(0, 255, 0, 0.01),
-    rgba(0, 0, 255, 0.03)
-  );
-  background-size: 100% 4px, 6px 100%;
-  pointer-events: none;
-  z-index: 9;
-}
-
-/* Subtle CRT phosphor flicker */
-@keyframes crtFlicker {
-  0% { opacity: 0.985; }
-  50% { opacity: 1; }
-  100% { opacity: 0.988; }
-}
-
-.crt-flicker {
-  position: absolute;
-  inset: 0;
-  animation: crtFlicker 0.12s infinite;
-  pointer-events: none;
-  z-index: 8;
-}
-
-/* Video Player Container */
-.player-wrapper {
-  position: absolute;
-  inset: 0;
+  aspect-ratio: 16 / 9;
   background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Video Player YouTube */
+.player-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 #yt-player {
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Keep clicks inside TV UI controls */
 }
 
-/* Static Noise Overlay (Used on Channel Zap & Startup) */
+/* Scanlines leggere */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Canvas statica per cambio canale */
 .static-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 7;
+  z-index: 6;
   opacity: 0;
   transition: opacity 0.05s ease;
 }
@@ -277,690 +173,275 @@ body.tv-on .ambient-glow {
   opacity: 1;
 }
 
-/* CRT Turn Off / Turn On Animations */
-@keyframes crtTurnOn {
-  0% {
-    transform: scale(0.001, 0.001);
-    filter: brightness(30);
-    opacity: 0;
-  }
-  35% {
-    transform: scale(1, 0.005);
-    filter: brightness(20);
-    opacity: 1;
-  }
-  70% {
-    transform: scale(1, 1);
-    filter: brightness(2.5);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1, 1);
-    filter: brightness(1);
-    opacity: 1;
-  }
-}
+/* ==========================================================================
+   OSD MINIMALE SOPRA AL VIDEO (Canale e Timer)
+   ========================================================================== */
 
-.crt-screen.power-on-anim {
-  animation: crtTurnOn 0.45s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-/* Standby Screen Overlay */
-.standby-overlay {
+.screen-osd {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, #0f1512 0%, #050806 80%, #000 100%);
+  top: 14px;
+  left: 16px;
+  right: 16px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  z-index: 15;
-  padding: 30px;
-  text-align: center;
+  pointer-events: none;
+  z-index: 8;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 800;
+}
+
+.osd-pill {
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--tv-osd-green);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  border: 1px solid rgba(57, 255, 20, 0.4);
+  text-shadow: 0 0 8px var(--tv-osd-green);
+}
+
+.osd-timer-pill {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 204, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--tv-accent);
+  text-shadow: 0 0 8px var(--tv-accent);
+}
+
+.osd-timer-pill span {
+  font-size: 1.1rem;
+  min-width: 36px;
+  text-align: right;
+}
+
+.osd-bar {
+  width: 80px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.osd-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ffcc00, #ff3b30);
+  transition: width 0.95s linear;
+}
+
+/* Banner Sblocco Audio */
+.audio-unmute-overlay {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9;
+  opacity: 0;
+  visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s;
 }
 
-.standby-overlay.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+.audio-unmute-overlay.show {
+  opacity: 1;
+  visibility: visible;
 }
 
-.standby-badge {
-  font-family: "Courier New", Courier, monospace;
-  color: var(--tv-osd-green);
-  font-size: 0.85rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  text-shadow: 0 0 10px var(--tv-osd-green);
-}
-
-.standby-title {
-  font-family: "Impact", "Arial Black", sans-serif;
-  font-size: 2.8rem;
-  letter-spacing: 2px;
+.btn-unmute {
+  background: rgba(255, 59, 48, 0.9);
   color: #fff;
-  text-transform: uppercase;
-  text-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.4),
-    3px 3px 0 #000;
-  margin-bottom: 6px;
-}
-
-.standby-subtitle {
-  font-size: 1rem;
-  color: #9ba3af;
-  margin-bottom: 24px;
-  max-width: 420px;
-  line-height: 1.4;
-}
-
-.btn-power-start {
-  background: linear-gradient(180deg, #ff3b30 0%, #c4180d 100%);
-  border: 2px solid #ff7970;
-  color: #fff;
-  padding: 16px 36px;
-  font-size: 1.25rem;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-size: 0.95rem;
   font-weight: 800;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  border-radius: 50px;
+  letter-spacing: 1px;
   cursor: pointer;
-  box-shadow: 
-    0 8px 25px rgba(255, 59, 48, 0.6),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 6px 20px rgba(255, 59, 48, 0.6);
+  animation: pulseButton 1.5s infinite;
+}
+
+@keyframes pulseButton {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Avviso Solo Avanti */
+.alert-solo-avanti {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(220, 20, 20, 0.95);
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 10px #000;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  display: flex;
-  align-items: center;
-  gap: 12px;
 }
 
-.btn-power-start:hover {
-  transform: scale(1.05);
-  box-shadow: 
-    0 12px 35px rgba(255, 59, 48, 0.8),
-    inset 0 2px 6px rgba(255, 255, 255, 0.6);
-}
-
-.btn-power-start:active {
-  transform: scale(0.96);
+.alert-solo-avanti.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 /* ==========================================================================
-   ON-SCREEN DISPLAY (OSD / TELETEXT VINTAGE HUD)
+   BARRA INTEGRATA: TITOLO & FRECCIA AVANTI
    ========================================================================== */
 
-.osd-layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 11;
-  padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-family: "Courier New", Courier, monospace, monospace;
-  font-weight: bold;
-  text-shadow: 
-    0 0 6px var(--tv-osd-green),
-    0 0 12px var(--tv-osd-green),
-    1px 1px 1px #000;
-}
-
-.osd-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.osd-channel-box {
-  background: rgba(0, 0, 0, 0.65);
-  padding: 6px 12px;
-  border: 1px solid var(--tv-osd-green);
-  border-radius: 4px;
-}
-
-.osd-channel {
-  color: var(--tv-osd-green);
-  font-size: 1.2rem;
-  letter-spacing: 2px;
-}
-
-.osd-timer-box {
-  background: rgba(0, 0, 0, 0.7);
-  padding: 8px 14px;
-  border: 1px solid var(--tv-osd-amber);
-  border-radius: 4px;
-  text-align: right;
-  text-shadow: 
-    0 0 6px var(--tv-osd-amber),
-    0 0 12px var(--tv-osd-amber);
-}
-
-.osd-timer-title {
-  color: var(--tv-osd-amber);
-  font-size: 0.8rem;
-  letter-spacing: 1.5px;
-  margin-bottom: 2px;
-}
-
-.osd-timer-display {
+.tv-control-bar {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding: 4px 6px;
+  gap: 16px;
 }
 
-.osd-seconds {
-  font-size: 1.6rem;
+.tv-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.video-title {
+  font-size: 1.25rem;
+  font-weight: 800;
   color: #fff;
-  font-weight: 900;
-  min-width: 55px;
-}
-
-/* 15-second retro progress bar */
-.osd-prog-bar {
-  width: 120px;
-  height: 10px;
-  background: #222;
-  border: 1px solid var(--tv-osd-amber);
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-}
-
-.osd-prog-fill {
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(90deg, #ffcc00, #ff3300);
-  transition: width 0.9s linear;
-}
-
-/* OSD Center Alert: e.g. "MI CONSENTA! SI VA SOLO AVANTI" */
-.osd-alert {
-  align-self: center;
-  background: rgba(220, 20, 20, 0.9);
-  color: #fff;
-  border: 2px solid #fff;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 1.3rem;
-  letter-spacing: 2px;
-  text-align: center;
-  text-shadow: 0 0 10px #000;
-  box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
-  opacity: 0;
-  transform: scale(0.9);
-  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.osd-alert.show {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* OSD Bottom: Video Info & Channel Tag */
-.osd-bottom {
-  background: rgba(0, 0, 0, 0.75);
-  padding: 10px 16px;
-  border-left: 4px solid var(--tv-osd-green);
-  border-radius: 0 6px 6px 0;
-  max-width: 90%;
-}
-
-.osd-video-title {
-  color: #fff;
-  font-size: 1rem;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
-.osd-video-meta {
-  display: flex;
-  gap: 16px;
-  font-size: 0.8rem;
-  color: var(--tv-osd-green);
-}
-
-/* ==========================================================================
-   TV CONTROL PANEL (RIGHT SIDE CHASSIS)
-   ========================================================================== */
-
-.tv-controls {
-  width: 220px;
-  background: linear-gradient(180deg, #1b1d22 0%, #16171b 100%);
-  border-radius: 24px;
-  padding: 20px 16px;
-  border: 2px solid #282a32;
-  box-shadow: 
-    inset 0 2px 6px rgba(255, 255, 255, 0.05),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* TV Brand Badge */
-.brand-badge {
-  text-align: center;
-  margin-bottom: 12px;
-  width: 100%;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #2c2f38;
-}
-
-.brand-logo-text {
-  font-family: "Impact", "Arial Black", sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: 2px;
-  color: var(--tv-gold);
-  text-shadow: 0 1px 2px #000, 0 0 10px rgba(212, 175, 55, 0.4);
-}
-
-.brand-subtext {
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  color: #838a97;
-  text-transform: uppercase;
-}
-
-/* 7-Segment Retro Display for Channel */
-.channel-display-7seg {
-  background: #090b0d;
-  border: 2px solid #2d3038;
-  border-radius: 8px;
-  padding: 6px 14px;
-  box-shadow: inset 0 0 10px #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  margin-bottom: 16px;
-}
-
-.seg-label {
-  font-size: 0.7rem;
-  color: #666;
-  font-weight: bold;
-}
-
-.seg-value {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 1.6rem;
-  font-weight: 900;
-  color: var(--tv-led-green);
-  text-shadow: 0 0 10px var(--tv-led-green);
-}
-
-/* Power Section */
-.power-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0 10px;
-  margin-bottom: 18px;
-}
-
-.led-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.led-light {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #330000;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-.led-light.standby {
-  background: var(--tv-led-red);
-  box-shadow: 0 0 12px var(--tv-led-red);
-}
-
-.led-light.on {
-  background: var(--tv-led-green);
-  box-shadow: 0 0 15px var(--tv-led-green);
-}
-
-.led-label {
-  font-size: 0.6rem;
-  color: #777;
+.video-meta {
+  font-size: 0.85rem;
+  color: var(--tv-text-dim);
+  font-family: monospace;
   letter-spacing: 1px;
 }
 
-.btn-power-chassis {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #2c2f37, #191b20);
-  border: 2px solid #454955;
-  color: #ff3b30;
+/* FRECCIA AVANTI */
+.tv-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 
-    0 4px 8px rgba(0, 0, 0, 0.6),
-    inset 0 1px 2px rgba(255, 255, 255, 0.2);
-  transition: transform 0.1s ease;
 }
 
-.btn-power-chassis:active {
-  transform: scale(0.92);
-}
-
-.btn-power-chassis svg {
-  width: 22px;
-  height: 22px;
-}
-
-/* ==========================================================================
-   THE "SOLO AVANTI" BIG ROTARY / CH+ BUTTON
-   ========================================================================== */
-
-.channel-forward-section {
-  width: 100%;
+.btn-arrow-next {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-bottom: 18px;
-}
-
-.forward-badge-notice {
-  font-size: 0.65rem;
-  color: var(--tv-gold);
+  gap: 10px;
+  background: linear-gradient(180deg, #ffcc00 0%, #d4a000 100%);
+  color: #121316;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 1.1rem;
+  font-weight: 900;
   letter-spacing: 1.5px;
-  font-weight: 800;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  text-align: center;
-}
-
-.btn-avanti-big {
-  width: 100%;
-  background: linear-gradient(145deg, #32353e 0%, #1e2026 100%);
-  border: 3px solid #4f5462;
-  border-radius: 16px;
-  padding: 16px 10px;
-  color: #fff;
   cursor: pointer;
   box-shadow: 
-    0 8px 16px rgba(0, 0, 0, 0.7),
-    inset 0 2px 4px rgba(255, 255, 255, 0.25);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+    0 6px 16px rgba(255, 204, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
   transition: all 0.15s ease;
 }
 
-.btn-avanti-big:hover {
-  background: linear-gradient(145deg, #3d414c 0%, #24272e 100%);
-  border-color: var(--tv-gold);
+.btn-arrow-next svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.15s ease;
 }
 
-.btn-avanti-big:active {
-  transform: translateY(3px);
-  box-shadow: 
-    0 2px 6px rgba(0, 0, 0, 0.9),
-    inset 0 1px 2px rgba(0, 0, 0, 0.5);
+.btn-arrow-next:hover {
+  background: linear-gradient(180deg, #ffd633 0%, #e6b000 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(255, 204, 0, 0.55);
 }
 
-.avanti-title {
-  font-family: "Impact", sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 2px;
-  color: #fff;
-  text-shadow: 0 2px 4px #000;
+.btn-arrow-next:hover svg {
+  transform: translateX(4px);
 }
 
-.avanti-sub {
-  font-size: 0.68rem;
-  color: var(--tv-gold-light);
-  letter-spacing: 1px;
-  font-weight: bold;
+.btn-arrow-next:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 8px rgba(255, 204, 0, 0.3);
 }
 
-/* Volume Controls */
-.volume-section {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-}
+/* ==========================================================================
+   CREDITI SOTTO AL TELEVISORE
+   ========================================================================== */
 
-.btn-vol {
-  flex: 1;
-  background: #252830;
-  border: 1px solid #3d414e;
-  border-radius: 8px;
-  padding: 10px 4px;
-  color: #bbb;
-  font-size: 0.75rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.btn-vol:hover {
-  background: #333844;
-  color: #fff;
-}
-
-.btn-vol:active {
-  transform: scale(0.95);
-}
-
-/* Speaker Grille Slots */
-.speaker-grille {
-  width: 100%;
+.credits-bar {
+  margin-top: 18px;
+  text-align: center;
+  color: #8b92a0;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 10px 8px;
-  background: #111317;
-  border-radius: 10px;
-  border: 1px solid #22242a;
+  font-size: 0.88rem;
 }
 
-.grille-slot {
-  height: 4px;
-  width: 100%;
-  background: #08090b;
-  border-radius: 2px;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.9);
+.credits-main {
+  color: #d1d5db;
 }
 
-/* ==========================================================================
-   VINTAGE REMOTE CONTROL (TELECOMANDO SILVO)
-   ========================================================================== */
-
-.remote-control {
-  width: 220px;
-  background: linear-gradient(145deg, #24262c 0%, #17181c 100%);
-  border: 3px solid #3c404c;
-  border-radius: 30px;
-  padding: 24px 16px;
-  box-shadow: 
-    0 20px 50px rgba(0, 0, 0, 0.8),
-    inset 0 2px 4px rgba(255, 255, 255, 0.15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+.credits-main strong {
+  color: #ffcc00;
+  letter-spacing: 1px;
 }
 
-.remote-emitter {
-  width: 20px;
-  height: 6px;
-  background: #880000;
-  border-radius: 4px 4px 0 0;
-  margin-top: -16px;
-  box-shadow: 0 0 6px #ff0000;
+.credits-sub {
+  font-size: 0.78rem;
+  opacity: 0.8;
 }
 
-.remote-header {
-  font-family: "Impact", sans-serif;
-  color: var(--tv-gold);
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-  text-align: center;
-}
-
-.remote-grid {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.btn-remote-avanti {
-  width: 100%;
-  background: linear-gradient(180deg, #e6b800 0%, #b38f00 100%);
-  border: 2px solid #ffe066;
-  border-radius: 14px;
-  padding: 16px 8px;
-  color: #1a1a1a;
-  font-family: "Impact", sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  box-shadow: 0 6px 15px rgba(230, 184, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: transform 0.1s ease;
-}
-
-.btn-remote-avanti:active {
-  transform: scale(0.95);
-}
-
-.remote-fake-back {
-  background: #1e2025;
-  border: 1px dashed #444;
-  border-radius: 8px;
-  padding: 8px;
-  color: #555;
-  font-size: 0.7rem;
-  text-align: center;
-  font-style: italic;
-}
-
-.remote-extra-row {
-  display: flex;
-  gap: 8px;
-  width: 100%;
-}
-
-.btn-remote-sm {
-  flex: 1;
-  background: #2b2e37;
-  border: 1px solid #3f4350;
-  border-radius: 8px;
-  padding: 10px 4px;
-  color: #eee;
-  font-size: 0.75rem;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.btn-remote-sm:active {
-  transform: scale(0.95);
-}
-
-/* ==========================================================================
-   FOOTER / CONTROLS HINT
-   ========================================================================== */
-
-.app-footer {
-  margin-top: 24px;
-  z-index: 2;
-  text-align: center;
-  color: #88909d;
-  font-size: 0.85rem;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.key-hint {
-  display: inline-block;
-  background: #22252c;
-  border: 1px solid #444955;
+.credits-sub kbd {
+  background: #252830;
+  border: 1px solid #444a56;
+  padding: 2px 6px;
   border-radius: 4px;
-  padding: 2px 8px;
   color: #fff;
   font-weight: bold;
-  font-family: monospace;
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (TABLET & MOBILE)
+   RESPONSIVE DESIGN
    ========================================================================== */
 
-@media (max-width: 1024px) {
-  .app-container {
-    flex-direction: column;
-  }
-  
-  .tv-chassis {
-    width: 100%;
-    max-width: 720px;
-  }
-
-  .remote-control {
-    width: 100%;
-    max-width: 420px;
-  }
-}
-
 @media (max-width: 768px) {
-  .tv-chassis {
-    padding: 16px;
-    border-radius: 24px;
+  body {
+    padding: 12px 8px;
   }
 
-  .tv-body {
-    flex-direction: column;
+  .retro-tv {
+    padding: 14px 12px 12px 12px;
+    border-radius: 20px;
   }
 
-  .tv-controls {
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .speaker-grille {
-    display: none;
-  }
-
-  .channel-forward-section {
-    order: 2;
-    margin-bottom: 0;
-  }
-
-  .standby-title {
-    font-size: 1.8rem;
-  }
-
-  .btn-power-start {
+  .video-title {
     font-size: 1rem;
-    padding: 12px 24px;
+  }
+
+  .btn-arrow-next {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+  }
+
+  .btn-arrow-next svg {
+    width: 16px;
+    height: 16px;
   }
 }
