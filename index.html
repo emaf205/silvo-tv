@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SILVO TV - Il Televisore di Silvio (Solo Avanti)</title>
+  <meta name="description" content="SILVO TV: Il televisore vintage CRT con i 30 video più memorabili di Silvio Berlusconi in autoplay randomico da 15 secondi con audio. Si va solo avanti!">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%200%22%20100%22%20100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>">
+</head>
+<body>
+
+  <!-- Retro Room Background -->
+  <div class="room-backdrop"></div>
+  <div class="ambient-glow" id="ambient-glow"></div>
+
+  <main class="app-container">
+
+    <!-- ============================================================
+         TELEVISORE VINTAGE CRT "SILVO TV"
+         ============================================================ -->
+    <article class="tv-chassis" id="tv-chassis" aria-label="Televisore SILVO TV">
+      
+      <!-- Antenne telescopiche vintage -->
+      <div class="tv-antenna-wrapper" aria-hidden="true">
+        <div class="antenna-left"></div>
+        <div class="antenna-right"></div>
+      </div>
+
+      <div class="tv-body">
+        
+        <!-- Screen Housing (Tubo Catodico) -->
+        <section class="screen-housing">
+          <div class="crt-screen" id="crt-screen">
+            
+            <!-- YouTube Player Wrapper -->
+            <div class="player-wrapper">
+              <div id="yt-player"></div>
+            </div>
+
+            <!-- Canvasi di static noise (Effetto cambio canale / accensione) -->
+            <canvas class="static-canvas" id="static-canvas" width="320" height="240" aria-hidden="true"></canvas>
+
+            <!-- Scanlines & Fosfori CRT -->
+            <div class="scanlines" aria-hidden="true"></div>
+            <div class="crt-flicker" aria-hidden="true"></div>
+
+            <!-- Standby Overlay (Prima accensione per sblocco Audio Browser) -->
+            <div class="standby-overlay" id="standby-overlay">
+              <div class="standby-badge">● STANDBY SYSTEM 1994</div>
+              <h1 class="standby-title">SILVO TV</h1>
+              <p class="standby-subtitle">
+                30 video storici di Silvio Berlusconi.<br>
+                15 secondi per clip, autoplay continuo con audio.<br>
+                <strong>Regola di rete: Si va solo avanti!</strong>
+              </p>
+              <button class="btn-power-start" id="btn-power-start" type="button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                  <line x1="12" y1="2" x2="12" y2="12"></line>
+                </svg>
+                ACCENDI SILVO TV
+              </button>
+            </div>
+
+            <!-- On-Screen Display (OSD / Grafica a Tubo Catodico) -->
+            <div class="osd-layer" id="osd-layer">
+              
+              <!-- OSD Top: Canale e Countdown 15 secondi -->
+              <div class="osd-top">
+                <div class="osd-channel-box">
+                  <span class="osd-channel" id="osd-channel-label">CH 05 SILVO</span>
+                </div>
+
+                <div class="osd-timer-box">
+                  <div class="osd-timer-title">PROSSIMO SILVIO IN:</div>
+                  <div class="osd-timer-display">
+                    <div class="osd-prog-bar">
+                      <div class="osd-prog-fill" id="osd-prog-fill"></div>
+                    </div>
+                    <span class="osd-seconds" id="osd-seconds">15s</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- OSD Center: Avviso "Si va solo avanti" -->
+              <div class="osd-alert" id="osd-alert" role="alert">
+                ⛔ MI CONSENTA! SU SILVO TV SI VA SOLO AVANTI!
+              </div>
+
+              <!-- OSD Bottom: Titolo della clip & Metadati -->
+              <div class="osd-bottom">
+                <div class="osd-video-title" id="osd-title">CARICAMENTO SEGNALE RETE 4...</div>
+                <div class="osd-video-meta">
+                  <span id="osd-meta-category">CATEGORIA: ARCHIVIO</span>
+                  <span id="osd-meta-year">ANNO: ----</span>
+                  <span id="osd-meta-count">CLIP: 01 / 30</span>
+                  <span id="osd-meta-audio">🔊 AUDIO 100%</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Pannello Controlli Fisici TV (A destra) -->
+        <aside class="tv-controls">
+          
+          <!-- Logo Targhetta Dorata -->
+          <div class="brand-badge">
+            <div class="brand-logo-text">SILVO TV</div>
+            <div class="brand-subtext">Trinitron Stereo Color</div>
+          </div>
+
+          <!-- Display Canale Digitale 7-Segmenti -->
+          <div class="channel-display-7seg">
+            <span class="seg-label">CANALE</span>
+            <span class="seg-value" id="display-ch-num">C05</span>
+          </div>
+
+          <!-- Tasto Accensione & LED Spia -->
+          <div class="power-section">
+            <div class="led-indicator">
+              <div class="led-light standby" id="tv-led"></div>
+              <span class="led-label" id="led-label">STANDBY</span>
+            </div>
+            <button class="btn-power-chassis" id="btn-power-toggle" title="Accendi/Spegni Televisore" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                <line x1="12" y1="2" x2="12" y2="12"></line>
+              </svg>
+            </button>
+          </div>
+
+          <!-- GRANDE TASTO: SOLO AVANTI >> -->
+          <div class="channel-forward-section">
+            <div class="forward-badge-notice">▶ NESSUN INDIETRO</div>
+            <button class="btn-avanti-big" id="btn-avanti-chassis" type="button" title="Passa subito al prossimo video (SOLO AVANTI)">
+              <span class="avanti-title">AVANTI &gt;&gt;</span>
+              <span class="avanti-sub">CAMBIA CANALE</span>
+            </button>
+          </div>
+
+          <!-- Regolazione Volume & Mute -->
+          <div class="volume-section">
+            <button class="btn-vol" id="btn-vol-down" type="button" title="Abbassa Volume">VOL -</button>
+            <button class="btn-vol" id="btn-vol-mute" type="button" title="Muto / Riattiva">MUTE</button>
+            <button class="btn-vol" id="btn-vol-up" type="button" title="Alza Volume">VOL +</button>
+          </div>
+
+          <!-- Griglia Diffusore Altoparlanti -->
+          <div class="speaker-grille" aria-hidden="true">
+            <div class="grille-slot"></div>
+            <div class="grille-slot"></div>
+            <div class="grille-slot"></div>
+            <div class="grille-slot"></div>
+            <div class="grille-slot"></div>
+            <div class="grille-slot"></div>
+            <div class="grille-slot"></div>
+          </div>
+
+        </aside>
+
+      </div>
+    </article>
+
+    <!-- ============================================================
+         TELECOMANDO VINTAGE SILVO
+         ============================================================ -->
+    <aside class="remote-control" aria-label="Telecomando Silvo TV">
+      <div class="remote-emitter" aria-hidden="true"></div>
+      <div class="remote-header">TELECOMANDO</div>
+
+      <div class="remote-grid">
+        <!-- Tasto gigante AVANTI -->
+        <button class="btn-remote-avanti" id="btn-remote-avanti" type="button">
+          AVANTI &gt;&gt;
+        </button>
+
+        <!-- Tasto finto indietro (Disabilitato / Monito) -->
+        <div class="remote-fake-back" id="btn-fake-back" title="Vietato tornare indietro">
+          ✖ INDIETRO [RIMOSSO PER DECRETO]
+        </div>
+
+        <div class="remote-extra-row">
+          <button class="btn-remote-sm" id="btn-remote-power" type="button">POWER</button>
+          <button class="btn-remote-sm" id="btn-remote-mute" type="button">AUDIO</button>
+        </div>
+
+        <div class="remote-extra-row">
+          <button class="btn-remote-sm" id="btn-remote-vol-down" type="button">VOL -</button>
+          <button class="btn-remote-sm" id="btn-remote-vol-up" type="button">VOL +</button>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Footer con scorciatoie tastiera -->
+  <footer class="app-footer">
+    <p>
+      Comandi da tastiera: 
+      <kbd class="key-hint">SPAZIO</kbd> o <kbd class="key-hint">→</kbd> per <strong>AVANTI</strong> | 
+      <kbd class="key-hint">P</kbd> per <strong>POWER</strong> | 
+      <kbd class="key-hint">M</kbd> per <strong>AUDIO</strong>
+    </p>
+    <p style="font-size: 0.75rem; opacity: 0.7;">
+      SILVO TV • Edizione Ufficiale Locale • Database di 30 clip storiche randomizzate
+    </p>
+  </footer>
+
+  <!-- Scripts (Compatibilità totale sia con file:// che server locale) -->
+  <script src="videos.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
