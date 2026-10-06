@@ -2,105 +2,157 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>SILVO TV - Il Televisore di Silvio</title>
-  <meta name="description" content="SILVO TV: Il televisore con i 30 video più iconici di Silvio Berlusconi in autoplay continuo da 15 secondi con audio. Si va solo avanti!">
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="SILVO TV: Il televisore tascabile con 200 video di Silvio Berlusconi in autoplay continuo da 15 secondi. Solo avanti!">
+  
+  <!-- PWA & Mobile Web App Meta Tags (iPhone / Android) -->
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#121316">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SILVO TV">
+  
+  <!-- Icone -->
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%200%22%20100%22%20100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>">
+  
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-  <!-- Sfondo minimale scuro -->
-  <div class="ambient-glow" id="ambient-glow"></div>
+  <!-- Bagliore ambiente scuro -->
+  <div class="ambient-glow" aria-hidden="true"></div>
 
-  <main class="tv-wrapper">
+  <main class="app-shell">
 
-    <!-- Televisore -->
-    <div class="retro-tv" id="retro-tv">
-      
-      <!-- Antenne retro -->
-      <div class="tv-antenna" aria-hidden="true">
-        <span class="ant ant-l"></span>
-        <span class="ant ant-r"></span>
+    <!-- Header Minimale Stile App iPhone -->
+    <header class="app-header">
+      <div class="header-brand">
+        <span class="tv-icon">📺</span>
+        <span class="brand-title">SILVO TV</span>
+        <span class="badge-total">200 VIDEO</span>
       </div>
-
-      <!-- Cornice Schermo -->
-      <div class="tv-bezel">
-        <div class="tv-screen" id="tv-screen">
-          
-          <!-- YouTube Video Player -->
-          <div class="player-container">
-            <div id="yt-player"></div>
-          </div>
-
-          <!-- Effetto Scanline leggero -->
-          <div class="scanlines" aria-hidden="true"></div>
-
-          <!-- Effetto Scarica Canale -->
-          <canvas class="static-canvas" id="static-canvas" width="320" height="240" aria-hidden="true"></canvas>
-
-          <!-- Banner Sblocco Audio (se bloccato da policy browser) -->
-          <div class="audio-unmute-overlay" id="audio-overlay">
-            <button class="btn-unmute" id="btn-unmute" type="button">
-              🔊 CLICCA PER ATTIVARE L'AUDIO
-            </button>
-          </div>
-
-          <!-- OSD minimale sopra al video: Canale & Countdown 15s -->
-          <div class="screen-osd">
-            <div class="osd-pill" id="osd-badge">SILVO TV • C05</div>
-            <div class="osd-timer-pill">
-              <span id="osd-seconds">15s</span>
-              <div class="osd-bar"><div class="osd-fill" id="osd-fill"></div></div>
-            </div>
-          </div>
-
-          <!-- Allarme se tenta di andare indietro -->
-          <div class="alert-solo-avanti" id="alert-solo-avanti">
-            ⛔ MI CONSENTA! SI VA SOLO AVANTI!
-          </div>
-
+      <div class="header-timer">
+        <div class="timer-countdown">
+          <span id="osd-seconds">15s</span>
+          <div class="timer-track"><div class="timer-fill" id="osd-fill"></div></div>
         </div>
       </div>
+    </header>
 
-      <!-- Barra di controllo integrata nella TV -->
-      <div class="tv-control-bar">
+    <!-- Televisore Compatto & Minimale -->
+    <section class="tv-container">
+      <div class="retro-tv">
         
-        <!-- Info Titolo Video in riproduzione -->
-        <div class="tv-info">
-          <div class="video-title" id="video-title">Caricamento Silvio...</div>
-          <div class="video-meta" id="video-meta">Clip 01/30 • 1994</div>
+        <!-- Antenne stilizzate -->
+        <div class="tv-antenna" aria-hidden="true">
+          <span class="ant ant-l"></span>
+          <span class="ant ant-r"></span>
         </div>
 
-        <!-- Tasto Freccia AVANTI (SOLO AVANTI) -->
-        <div class="tv-actions">
-          <button class="btn-arrow-next" id="btn-next" type="button" title="Prossimo Video (Solo Avanti)">
-            <span>AVANTI</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
+        <!-- Schermo TV -->
+        <div class="tv-bezel">
+          <div class="tv-screen" id="tv-screen">
+            
+            <!-- YouTube Embed -->
+            <div class="player-container">
+              <div id="yt-player"></div>
+            </div>
+
+            <!-- Effetto Scanline sottile -->
+            <div class="scanlines" aria-hidden="true"></div>
+
+            <!-- Canvas Statica Cambio Canale -->
+            <canvas class="static-canvas" id="static-canvas" width="320" height="240" aria-hidden="true"></canvas>
+
+            <!-- Badge Canale Sopra allo Schermo -->
+            <div class="screen-badge" id="screen-badge">C01</div>
+
+            <!-- Alert "Solo Avanti" -->
+            <div class="alert-solo-avanti" id="alert-solo-avanti">
+              ⛔ MI CONSENTA! SI VA SOLO AVANTI!
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Titolo e Metadati del Video in Riproduzione -->
+        <div class="video-info-box">
+          <h1 class="video-title" id="video-title">Caricamento Silvio...</h1>
+          <p class="video-meta" id="video-meta">Clip 001/200 • Archivio</p>
         </div>
 
       </div>
+    </section>
 
-    </div>
+    <!-- Barra Pulsanti Base (Muto, Installa PWA, Avanti) -->
+    <nav class="bottom-controls" aria-label="Controlli">
+      
+      <!-- Tasto Muto / Audio -->
+      <button class="btn-ctrl btn-audio" id="btn-audio" type="button" title="Attiva/Disattiva Audio">
+        <span class="btn-icon" id="audio-icon">🔊</span>
+        <span class="btn-label" id="audio-label">AUDIO ON</span>
+      </button>
 
-    <!-- Crediti puliti sotto al televisore -->
-    <footer class="credits-bar">
-      <p class="credits-main">
-        <strong>SILVO TV</strong> • 30 clip storiche randomizzate • 15 secondi per video • Autoplay continuo con audio
-      </p>
-      <p class="credits-sub">
-        Regola di rete: Si va solo avanti! Premi <kbd>SPAZIO</kbd> o <kbd>→</kbd> per cambiare canale.
-      </p>
+      <!-- Tasto Installa PWA su Smartphone -->
+      <button class="btn-ctrl btn-pwa" id="btn-install-pwa" type="button" title="Installa SILVO TV su Schermata Home">
+        <span class="btn-icon">📲</span>
+        <span class="btn-label">INSTALLA APP</span>
+      </button>
+
+      <!-- Tasto AVANTI (Solo Avanti) -->
+      <button class="btn-ctrl btn-next" id="btn-next" type="button" title="Prossimo Video (Solo Avanti)">
+        <span class="btn-label">AVANTI</span>
+        <span class="btn-arrow">➔</span>
+      </button>
+
+    </nav>
+
+    <!-- Crediti puliti -->
+    <footer class="app-credits">
+      <p><strong>SILVO TV</strong> • 200 clip di Silvio Berlusconi • 15 secondi a video • Si va solo avanti!</p>
+      <p class="credits-hint">Tocca <strong>AVANTI</strong> per cambiare o premi <kbd>SPAZIO</kbd> / <kbd>→</kbd></p>
     </footer>
 
   </main>
 
-  <!-- Script universali -->
-  <script src="videos.js"></script>
-  <script src="app.js"></script>
+  <!-- Modal / Popup Installazione PWA Smartphone (iOS & Android) -->
+  <aside class="pwa-modal-backdrop" id="pwa-modal" aria-hidden="true">
+    <div class="pwa-modal-card" role="dialog" aria-modal="true" aria-labelledby="pwa-modal-title">
+      <button class="pwa-modal-close" id="pwa-modal-close" type="button" aria-label="Chiudi popup">✕</button>
+      
+      <div class="pwa-modal-icon">📺</div>
+      <h2 class="pwa-modal-title" id="pwa-modal-title">Installa SILVO TV</h2>
+      <p class="pwa-modal-desc">
+        Aggiungi SILVO TV alla schermata home del tuo smartphone per un'esperienza a schermo intero come una vera app iPhone!
+      </p>
+
+      <!-- Guida specifica iOS iPhone -->
+      <div class="pwa-ios-instructions" id="pwa-ios-guide">
+        <div class="ios-step">
+          <span class="step-num">1</span>
+          <span>Tocca l'icona <strong>Condividi</strong> (in basso su Safari) <span class="ios-icon">⎋</span></span>
+        </div>
+        <div class="ios-step">
+          <span class="step-num">2</span>
+          <span>Scorri e tocca <strong>"Aggiungi a Schermata Home"</strong> ➕</span>
+        </div>
+      </div>
+
+      <!-- Tasto Installazione Android / Chrome -->
+      <div class="pwa-android-actions" id="pwa-android-guide">
+        <button class="btn-pwa-install-now" id="btn-pwa-install-now" type="button">
+          AGGIUNGI A SCHERMATA HOME
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Script (compatibilità totale locale e server FTP) -->
+  <script src="./videos.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>

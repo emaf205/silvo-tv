@@ -1,111 +1,97 @@
-# 📺 SILVO TV - Il Televisore di Silvio (Solo Avanti)
+# 📺 SILVO TV - Il Televisore Tascabile di Silvio (PWA)
 
 > **"Mi consenta: su questo televisore si va soltanto avanti!"**
 
-**SILVO TV** è una web app locale autonoma concepita come un televisore a tubo catodico (CRT) vintage anni '80/'90. Riproduce in loop continuo spezzoni da **15 secondi** dei momenti più iconici, storici e divertenti di **Silvio Berlusconi**, estratti in ordine casuale da un database di **30 video YouTube verificati**, con **audio attivo nel browser** e una rigorosa regola di sistema: **si può andare soltanto avanti!**
+**SILVO TV v2.0** è una Web App / Progressive Web App (PWA) ottimizzata per **smartphone (stile app nativa iPhone)** e desktop. Riproduce in loop continuo spezzoni da **15 secondi** di **200 video YouTube storici di Silvio Berlusconi** in ordine casuale, con audio, controlli minimi e la regola ferrea: **si può andare soltanto avanti!**
+
+Pronta al 100% per essere caricata via **FTP** sul proprio sito web o utilizzata in locale.
 
 ---
 
-## 🌟 Caratteristiche Principali
+## 🌟 Novità della Versione 2.0
 
-1. **Esperienza Televisore Vintage CRT**:
-   - Chassis fotorealistico stile Mivar / TeleMilano 58 con bombatura dello schermo e riflessi di luce sul vetro.
-   - Effetto scanlines interlacciate e fosfori CRT con bagliore ambientale dinamico.
-   - Interruttori fisici laterali, canale digitale a 7 segmenti (`C05`), manopole, LED di stato (Rosso = Standby, Verde = Acceso) e griglia altoparlanti.
-   - Telecomando vintage con pulsante indietro rimosso per decreto.
+1. **Catalogo Esteso a 200 Video YouTube**:
+   - 200 clip verificate e funzionanti tramite oEmbed che ripercorrono oltre 35 anni di storia: discorsi epici, comizi, barzellette, gag TV, sfoghi, apparizioni al Milan e al Monza, conferenze internazionali e tormentoni indimenticabili.
+   - Algoritmo Fisher-Yates per un ciclo random continuo infinito senza ripetizioni immediate.
 
-2. **Autoplay a 15 Secondi con Audio nel Browser**:
-   - Ogni clip viene riprodotta per esattamente **15 secondi**, dopodiché il televisore cambia canale automaticamente con una scarica statica analogica e passa a un nuovo video casuale.
-   - Gestione nativa delle policy audio dei browser moderni: la schermata di Standby consente di accendere la TV con un click, sbloccando istantaneamente l'audio a volume pieno per tutta la sessione.
+2. **Ottimizzazione Mobile Stile App iPhone**:
+   - Layout a tutto schermo con viewport dinamico (`100dvh`) e rispetto del notch / safe area di iOS.
+   - Design compatto, elegante e minimale: il televisore al centro, titolo e dettagli della clip, e barra inferiore ergonomica per il pollice.
 
-3. **Database Curato di 30 Video Storici**:
-   - 30 momenti leggendari che coprono oltre trent'anni di carriera politica, televisiva, calcistica e di intrattenimento:
-     - *La Discesa in Campo del 1994 ("L'Italia è il paese che amo")*
-     - *La pulizia della sedia di Travaglio da Santoro*
-     - *Il celebre "Cucù" ad Angela Merkel a Trieste*
-     - *Lo scontro con Martin Schulz al Parlamento Europeo ("Kapò")*
-     - *Obama "giovane, bello e anche abbronzato"*
-     - *Gianfranco Fini: "Che fai, mi cacci?"*
-     - *Il discorso al Monza con la promessa del "pullman di..."*
-     - *Le storiche "Corna" al vertice UE di Caceres*
-     - *La barzelletta della mela con Davide Mengacci*
-     - *Le telefonate furibonde a Ballarò e a L'Infedele ("Postribolo!")*
-     - *La barzelletta sull'aereo col Papa e Biden*
-     - *I rimproveri ai giocatori del Milan e i consigli tattici ad Allegri*
-     - *Inno ufficiale "Meno male che Silvio c'è"*
-     - *E molti altri capisaldi storici.*
+3. **Solo Pulsanti Base**:
+   - **`🔊 / 🔇 MUTO`**: Per attivare o silenziare l'audio al volo con feedback visivo.
+   - **`📲 INSTALLA APP`**: Apre il popup per aggiungere SILVO TV alla Schermata Home dello smartphone.
+   - **`AVANTI ➔`**: Grande pulsante dorato per cambiare subito canale in avanti.
 
-4. **Navigazione "Solo Avanti"**:
-   - Nessun tasto "Indietro" o "Precedente".
-   - Puoi avanzare quando vuoi premendo il pulsante **AVANTI >>**, il tasto sul telecomando o la **Barra Spaziatrice**.
-   - Se provi a premere la freccia sinistra o Backspace, scatta un allarme OSD a tutto schermo: `⛔ MI CONSENTA! SU SILVO TV SI VA SOLO AVANTI!` accompagnato da un cicalino acustico.
+4. **Progressive Web App (PWA) & Popup di Installazione**:
+   - `manifest.webmanifest` e `service-worker.js` con cache-busting `silvo-tv-v1.2.0`.
+   - **Su iPhone (Safari)**: Rileva iOS e apre la guida con istruzioni chiare (*Tocca Condividi ⎋ e "Aggiungi a Schermata Home" ➕*).
+   - **Su Android / Chrome**: Supporta l'installazione nativa con un solo tocco con l'evento `beforeinstallprompt`.
 
-5. **Effetti Sonori Analogici Nativi**:
-   - Zero file audio esterni che possono fallire il download: tutti i suoni (clic meccanico, scarica statica CRT e cicalino) sono generati in tempo reale con la **Web Audio API**.
+5. **Pronto per Upload via FTP**:
+   - Tutti i percorsi sono relativi (`./`), senza build complesse o dipendenze da Node lato server.
+   - Basta caricare i file tramite FileZilla o Cyberduck in una cartella del proprio hosting (es. `public_html/silvo-tv/`) e funzionerà all'istante su qualsiasi dominio.
 
 ---
 
-## 🚀 Come Avviare SILVO TV in Locale
+## 🚀 Come Caricare via FTP sul tuo Sito
 
-Puoi avviare SILVO TV con uno qualsiasi dei seguenti metodi:
+1. Apri il tuo client FTP preferito (FileZilla, Cyberduck, Transmit, ecc.).
+2. Collegati al tuo hosting.
+3. Carica tutti i file della cartella `silvo_tv_local_player` nella root o in una sottocartella (es. `/silvo-tv/`).
+4. Apri dal tuo smartphone l'URL: `https://iltuosito.it/silvo-tv/`.
+5. Tocca **`📲 INSTALLA APP`** per installarla come app sul tuo telefono!
 
-### Metodo 1: Script Rapido (Consigliato su macOS / Linux)
-Apri il terminale nella cartella del progetto ed esegui:
+---
+
+## 💻 Come Eseguire in Locale
+
 ```bash
+# Avvio rapido
 ./start.sh
-```
-*Lo script avvia il server locale e apre in automatico il televisore nel browser.*
 
-### Metodo 2: Con Python 3
-```bash
+# Oppure con Python
 python3 server.py
-```
-*SILVO TV si aprirà automaticamente su `http://localhost:8080/index.html`.*
 
-### Metodo 3: Con Node.js / npx
-```bash
+# Oppure con Node
 npm start
-# oppure
-npx -y serve . -p 8080
 ```
-
-### Metodo 4: Apertura Diretta del File
-Puoi anche fare semplicemente doppio clic su `index.html` nel Finder o eseguire:
-```bash
-open index.html
-```
+L'app si aprirà all'indirizzo [http://localhost:8080/index.html](http://localhost:8080/index.html).
 
 ---
 
-## 🎮 Comandi da Tastiera
+## 🎮 Comandi da Tastiera (Desktop)
 
 | Tasto | Azione |
 | :--- | :--- |
-| <kbd>Spazio</kbd> / <kbd>→</kbd> / <kbd>Invio</kbd> | **AVANTI >>** (Salta subito al prossimo video) |
+| <kbd>Spazio</kbd> / <kbd>→</kbd> / <kbd>Invio</kbd> | **AVANTI ➔** (Salta al prossimo video) |
 | <kbd>←</kbd> / <kbd>Backspace</kbd> | **Allarme "Solo Avanti"** (*Mi consenta!*) |
-| <kbd>P</kbd> | **Power** (Accendi / Metti in Standby la TV) |
 | <kbd>M</kbd> | **Muto / Riattiva Audio** |
-| <kbd>↑</kbd> / <kbd>↓</kbd> | **Volume + / Volume -** |
 
 ---
 
-## 📁 Struttura del Progetto
+## 📁 Struttura dei File
 
 ```text
 silvo_tv_local_player/
-├── index.html       # Interfaccia grafica con TV CRT, OSD e telecomando
-├── style.css        # Stili retro, scanlines, bombatura vetro e OSD fosfori verdi
-├── app.js           # Motore dell'applicazione, timer 15s, Web Audio SFX e logica
-├── videos.js        # Database con i 30 video YouTube, metadati e timing
-├── server.py        # Server HTTP locale Python con auto-apertura browser
-├── start.sh         # Script bash di avvio rapido per macOS/Linux
-├── package.json     # Metadati e script npm
-├── VERSION.txt      # Versione corrente (1.0.0)
-├── CHANGELOG.md     # Registro delle modifiche
-└── README.md        # Documentazione ufficiale del progetto
+├── index.html           # Interfaccia mobile-first con TV, controlli base e popup PWA
+├── style.css            # Stili minimali stile app iPhone, CRT effect, safe-areas
+├── app.js               # Motore PWA, YouTube player, timer 15s e navigazione solo avanti
+├── videos.js            # Database ufficiale con i 200 video YouTube verificati
+├── manifest.webmanifest # Manifest PWA per installazione come app nativa
+├── service-worker.js    # Caching offline e strategie di aggiornamento PWA
+├── icon-192.png         # Icona PWA 192x192
+├── icon-512.png         # Icona PWA 512x512
+├── apple-touch-icon.png # Icona Apple iOS 180x180
+├── server.py            # Server HTTP locale
+├── start.sh             # Script di avvio rapido
+├── package.json         # Metadati npm
+├── VERSION.txt          # Versione corrente (2.0.0)
+├── CHANGELOG.md         # Registro storico delle modifiche
+└── README.md            # Documentazione ufficiale del progetto
 ```
 
 ---
 
 ## 📜 Licenza
-Rilasciato sotto licenza MIT. Realizzato per uso locale e d'intrattenimento.
+Rilasciato sotto licenza MIT. Realizzato per uso satirico, storico e d'intrattenimento.
