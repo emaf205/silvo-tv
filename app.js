@@ -199,7 +199,7 @@
     triggerStaticZap(durationMs = 180) {
       if (!this.dom.staticCanvas) return;
       this.dom.staticCanvas.classList.add('active');
-      this.playZapSound();
+      // Effetto sonoro rimosso su richiesta: cambio canale 100% fluido e silenzioso
 
       const startTime = performance.now();
       const loop = (now) => {

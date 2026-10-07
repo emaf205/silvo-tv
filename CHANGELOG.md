@@ -5,6 +5,12 @@ Tutte le modifiche degne di nota a questo progetto saranno documentate in questo
 Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/),
 e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/).
 
+## [2.0.1] - 2026-10-07
+
+### Modificato
+- **Cambio Canale 100% Silenzioso**: Rimosso l'effetto sonoro (zap/beep) durante la transizione video, mantenendo l'audio del video intatto e fluido.
+- **Data e Metadati Archivio**: Inclusa la data di sviluppo (`DATE: 2024-10`) e screenshot ad alta risoluzione del player.
+
 ## [2.0.0] - 2026-10-06
 
 ### Aggiunto

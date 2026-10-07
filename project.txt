@@ -3,4 +3,5 @@ SUBTITLE: Il Televisore di Silvio (Solo Avanti)
 DESCRIPTION: Web App PWA vintage CRT con 200 video storici di Silvio Berlusconi in autoplay continuo da 15 secondi. Solo avanti!
 STATUS: active
 TAGS: PWA, Web App, Satira, Retro TV, YouTube Player, Video
+DATE: 2024-10
 URL: index.html
