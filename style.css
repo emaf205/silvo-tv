@@ -83,6 +83,29 @@ html, body {
   gap: 8px;
 }
 
+.btn-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e5e5e5;
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-home-link:hover, .btn-home-link:active {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
 .tv-icon {
   font-size: 1.3rem;
 }
@@ -432,6 +455,18 @@ html, body {
   padding: 1px 4px;
   border-radius: 3px;
   color: #fff;
+}
+
+.credits-home-link {
+  color: var(--tv-accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.credits-home-link:hover {
+  text-decoration: underline;
+  opacity: 0.85;
 }
 
 /* ==========================================================================
