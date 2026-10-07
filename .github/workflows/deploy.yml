@@ -1,0 +1,38 @@
+name: 🚀 Deploy Automatico FTP
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  web-deploy:
+    name: 📡 Caricamento su Hosting FTP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout del repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: 📤 Sincronizzazione FTP su StackCP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_DIR || 'public_html/emaf205/ideas/silvo-tv/' }}
+          protocol: ftp
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github*
+            **/.github*/**
+            **/node_modules/**
+            **/server.py
+            **/start.sh
+            **/package.json
+            **/package-lock.json
+            **/.DS_Store

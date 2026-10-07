@@ -10,6 +10,7 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 ### Modificato
 - **Cambio Canale 100% Silenzioso**: Rimosso l'effetto sonoro (zap/beep) durante la transizione video, mantenendo l'audio del video intatto e fluido.
 - **Data e Metadati Archivio**: Inclusa la data di sviluppo (`DATE: 2024-10`) e screenshot ad alta risoluzione del player.
+- **Deploy Automatico via GitHub Actions**: Aggiunto workflow CI/CD `.github/workflows/deploy.yml` per la sincronizzazione continua del sito via FTP ad ogni push su branch `main`.
 
 ## [2.0.0] - 2026-10-06
 

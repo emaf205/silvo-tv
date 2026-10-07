@@ -34,12 +34,28 @@ Pronta al 100% per essere caricata via **FTP** sul proprio sito web o utilizzata
 
 ---
 
-## 🚀 Come Caricare via FTP sul tuo Sito
+## 🚀 Deploy Automatico via GitHub Actions (FTP)
+
+Il repository include un workflow GitHub Actions in `.github/workflows/deploy.yml` che sincronizza automaticamente il sito sul server FTP ad ogni `git push` sul branch `main`.
+
+### Configurazione Secrets su GitHub:
+Vai su **Settings** del repository GitHub ➔ **Secrets and variables** ➔ **Actions** ➔ **New repository secret** e aggiungi:
+
+1. `FTP_SERVER`: `ftp.gb.stackcp.com`
+2. `FTP_USERNAME`: `emozionare.net`
+3. `FTP_PASSWORD`: *(la tua password FTP)*
+4. *(Opzionale)* `FTP_DIR`: `public_html/emaf205/ideas/silvo-tv/` *(se non specificato, usa questo percorso predefinito)*
+
+Ad ogni commit/push su `main`, GitHub Actions caricherà automaticamente solo i file modificati sul tuo hosting!
+
+---
+
+## 🛠️ Come Caricare Manualmente via FTP sul tuo Sito
 
 1. Apri il tuo client FTP preferito (FileZilla, Cyberduck, Transmit, ecc.).
-2. Collegati al tuo hosting.
-3. Carica tutti i file della cartella `silvo_tv_local_player` nella root o in una sottocartella (es. `/silvo-tv/`).
-4. Apri dal tuo smartphone l'URL: `https://iltuosito.it/silvo-tv/`.
+2. Collegati al tuo hosting (`ftp.gb.stackcp.com`).
+3. Carica i file nella cartella di destinazione (es. `public_html/emaf205/ideas/silvo-tv/`).
+4. Apri dal tuo smartphone l'URL: `https://emaf205.com/ideas/silvo-tv/`.
 5. Tocca **`📲 INSTALLA APP`** per installarla come app sul tuo telefono!
 
 ---
