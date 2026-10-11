@@ -1,97 +1,86 @@
-# 📺 SILVO TV - Il Televisore Tascabile di Silvio (PWA)
+# 📺 SILVO TV — Pocket CRT Stream & Satirical Time Capsule
 
-> **"Mi consenta: su questo televisore si va soltanto avanti!"**
+<p align="center">
+  <img src="https://emaf205.com/github/assets/covers/silvo-tv.jpg" alt="SILVO TV Cover Artwork" width="100%">
+</p>
 
-**SILVO TV v2.0** è una Web App / Progressive Web App (PWA) ottimizzata per **smartphone (stile app nativa iPhone)** e desktop. Riproduce in loop continuo spezzoni da **15 secondi** di **200 video YouTube storici di Silvio Berlusconi** in ordine casuale, con audio, controlli minimi e la regola ferrea: **si può andare soltanto avanti!**
+> **"Mi consenta: on this television, there is only forward!"**  
+> A mobile-first Progressive Web App (PWA) recreating a vintage portable CRT television that plays an endless, randomized stream of 200 historical YouTube broadcast moments in continuous 15-second bursts.
 
-Pronta al 100% per essere caricata via **FTP** sul proprio sito web o utilizzata in locale.
-
----
-
-## 🌟 Novità della Versione 2.0
-
-1. **Catalogo Esteso a 200 Video YouTube**:
-   - 200 clip verificate e funzionanti tramite oEmbed che ripercorrono oltre 35 anni di storia: discorsi epici, comizi, barzellette, gag TV, sfoghi, apparizioni al Milan e al Monza, conferenze internazionali e tormentoni indimenticabili.
-   - Algoritmo Fisher-Yates per un ciclo random continuo infinito senza ripetizioni immediate.
-
-2. **Ottimizzazione Mobile Stile App iPhone**:
-   - Layout a tutto schermo con viewport dinamico (`100dvh`) e rispetto del notch / safe area di iOS.
-   - Design compatto, elegante e minimale: il televisore al centro, titolo e dettagli della clip, e barra inferiore ergonomica per il pollice.
-
-3. **Solo Pulsanti Base**:
-   - **`🔊 / 🔇 MUTO`**: Per attivare o silenziare l'audio al volo con feedback visivo.
-   - **`📲 INSTALLA APP`**: Apre il popup per aggiungere SILVO TV alla Schermata Home dello smartphone.
-   - **`AVANTI ➔`**: Grande pulsante dorato per cambiare subito canale in avanti.
-
-4. **Progressive Web App (PWA) & Popup di Installazione**:
-   - `manifest.webmanifest` e `service-worker.js` con cache-busting `silvo-tv-v1.2.0`.
-   - **Su iPhone (Safari)**: Rileva iOS e apre la guida con istruzioni chiare (*Tocca Condividi ⎋ e "Aggiungi a Schermata Home" ➕*).
-   - **Su Android / Chrome**: Supporta l'installazione nativa con un solo tocco con l'evento `beforeinstallprompt`.
-
-5. **Pronto per Upload via FTP**:
-   - Tutti i percorsi sono relativi (`./`), senza build complesse o dipendenze da Node lato server.
-   - Basta caricare i file tramite FileZilla o Cyberduck in una cartella del proprio hosting (es. `public_html/silvo-tv/`) e funzionerà all'istante su qualsiasi dominio.
+[![Live Demo](https://img.shields.io/badge/Live_PWA-emaf205.com%2Fideas%2Fsilvo--tv-dfff00?style=for-the-badge&logo=googlechrome&logoColor=000000)](https://emaf205.com/ideas/silvo-tv/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-emaf205%2Fsilvo--tv-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/emaf205/silvo-tv)
+[![License: MIT](https://img.shields.io/badge/License-MIT-black?style=for-the-badge)](LICENSE)
 
 ---
 
-## 🚀 Come Caricare via FTP sul tuo Sito
+## ✦ The Genesis & Why This Exists
 
-1. Apri il tuo client FTP preferito (FileZilla, Cyberduck, Transmit, ecc.).
-2. Collegati al tuo hosting.
-3. Carica tutti i file della cartella `silvo_tv_local_player` nella root o in una sottocartella (es. `/silvo-tv/`).
-4. Apri dal tuo smartphone l'URL: `https://iltuosito.it/silvo-tv/`.
-5. Tocca **`📲 INSTALLA APP`** per installarla come app sul tuo telefono!
+Italian television between the late 1980s and the 2010s was completely shaped by one figure: Silvio Berlusconi. From revolutionizing commercial broadcasting with Fininvest/Mediaset to transforming political communication into pure spectacle, his media presence was relentless, unforgettable, and deeply surreal.
 
----
+I built **SILVO TV** as an experiential digital time capsule. Most YouTube archives are passive: you search, click, pause, scrub through timelines. That misses the entire psychological essence of 90s television. 
 
-## 💻 Come Eseguire in Locale
-
-```bash
-# Avvio rapido
-./start.sh
-
-# Oppure con Python
-python3 server.py
-
-# Oppure con Node
-npm start
-```
-L'app si aprirà all'indirizzo [http://localhost:8080/index.html](http://localhost:8080/index.html).
+SILVO TV strips away the modern interface entirely:
+1. **The 15-Second Rule**: Every clip plays for exactly 15 seconds before automatically advancing to another unexpected historical broadcast clip spanning over 35 years of politics, football (AC Milan & Monza), international summits, TV sketches, and viral press conferences.
+2. **The "Forward-Only" Philosophy**: Traditional remotes let you rewind. SILVO TV explicitly forbids going back. There is only one direction: **AVANTI (Forward)**. If you press back, an audible alarm triggers: *"Mi consenta!"*
+3. **Pocket CRT Aesthetic**: Designed with an ultra-responsive native iPhone feel (`100dvh`), nostalgic scanlines, curved cathode tube vignette, and acid-yellow telemetry.
 
 ---
 
-## 🎮 Comandi da Tastiera (Desktop)
+## ✦ Key Features
 
-| Tasto | Azione |
-| :--- | :--- |
-| <kbd>Spazio</kbd> / <kbd>→</kbd> / <kbd>Invio</kbd> | **AVANTI ➔** (Salta al prossimo video) |
-| <kbd>←</kbd> / <kbd>Backspace</kbd> | **Allarme "Solo Avanti"** (*Mi consenta!*) |
-| <kbd>M</kbd> | **Muto / Riattiva Audio** |
+- **📼 200 Curated Historical YouTube Clips**: Verified video catalog indexed across four decades, utilizing the Fisher-Yates shuffle algorithm to guarantee no immediate repeats.
+- **📱 Native iPhone Ergonomics**: Full viewport height, respects iOS notch safe areas, and places critical controls directly under the user's thumb.
+- **🔊 Immediate Audio Controls**: One-tap toggle between Mute and Sound with instant visual status feedback.
+- **📲 Progressive Web App (PWA)**:
+  - Add to Home Screen prompts tailored for iOS Safari and Android Chrome.
+  - Offline asset caching with Service Worker lifecycle (`silvo-tv-v1.2.0`).
+- **⌨️ Desktop Keyboard Bindings**:
+  - <kbd>Space</kbd> / <kbd>→</kbd> / <kbd>Enter</kbd>: Next channel forward.
+  - <kbd>←</kbd> / <kbd>Backspace</kbd>: Triggers the "Only Forward!" alarm.
+  - <kbd>M</kbd>: Mute / Unmute audio.
+- **🚀 Zero Server Overhead**: 100% vanilla client-side web application. Runs on any static web host, Apache, Nginx, or GitHub Pages.
 
 ---
 
-## 📁 Struttura dei File
+## ✦ Technical Architecture
 
 ```text
 silvo_tv_local_player/
-├── index.html           # Interfaccia mobile-first con TV, controlli base e popup PWA
-├── style.css            # Stili minimali stile app iPhone, CRT effect, safe-areas
-├── app.js               # Motore PWA, YouTube player, timer 15s e navigazione solo avanti
-├── videos.js            # Database ufficiale con i 200 video YouTube verificati
-├── manifest.webmanifest # Manifest PWA per installazione come app nativa
-├── service-worker.js    # Caching offline e strategie di aggiornamento PWA
-├── icon-192.png         # Icona PWA 192x192
-├── icon-512.png         # Icona PWA 512x512
-├── apple-touch-icon.png # Icona Apple iOS 180x180
-├── server.py            # Server HTTP locale
-├── start.sh             # Script di avvio rapido
-├── package.json         # Metadati npm
-├── VERSION.txt          # Versione corrente (2.0.0)
-├── CHANGELOG.md         # Registro storico delle modifiche
-└── README.md            # Documentazione ufficiale del progetto
+├── index.html           # Semantic mobile-first layout with CRT tube frame
+├── style.css            # CRT scanline effects, iOS safe-area handling, gold accents
+├── app.js               # State machine: timer loops, YouTube API bridge, PWA logic
+├── videos.js            # Curated database of 200 verified video IDs and timestamps
+├── manifest.webmanifest # PWA configuration for native homescreen launch
+├── service-worker.js    # Cache-busting offline resilience
+└── assets/              # Icons and custom sounds
 ```
+
+### Video Engine
+Instead of embedding heavyweight iframe elements that cause mobile memory leaks, the player dynamically orchestrates the YouTube IFrame Player API. A precise 15,000ms timer synchronizes video playback with automatic channel switching, pre-buffering the next clip seamlessly.
 
 ---
 
-## 📜 Licenza
-Rilasciato sotto licenza MIT. Realizzato per uso satirico, storico e d'intrattenimento.
+## ✦ Quickstart & Local Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/emaf205/silvo-tv.git
+cd silvo-tv
+
+# Start with Python
+python3 -m http.server 8080
+
+# Or start with Node
+npx serve .
+```
+
+Open [http://localhost:8080](http://localhost:8080) in your mobile browser or Safari on iPhone.
+
+---
+
+## ✦ Author & Process
+
+Engineered by **[Emanuele BDC](https://emaf205.com)** in Milan.  
+Created through human-in-the-loop rapid prototyping with AI, combining cultural commentary, media archaeology, and clean web engineering.
+
+Distributed under the **MIT License**. Free for historical, educational, and satirical exploration.
