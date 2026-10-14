@@ -1,7 +1,7 @@
 # 📺 SILVO TV — Pocket CRT Stream & Satirical Time Capsule
 
 <p align="center">
-  <img src="https://emaf205.com/github/assets/covers/silvo-tv.jpg" alt="SILVO TV Cover Artwork" width="100%">
+  <img src="assets/social-preview.jpg" alt="SILVO TV Cover Artwork" width="100%">
 </p>
 
 > **"Mi consenta: on this television, there is only forward!"**  
