@@ -1,18 +1,22 @@
 {
   "name": "silvo-tv",
-  "version": "1.0.0",
-  "description": "SILVO TV - Il televisore vintage CRT con i 30 video più iconici di Silvio Berlusconi. 15 secondi per clip, autoplay continuo con audio nel browser, navigazione rigorosamente Solo Avanti.",
+  "version": "2.0.2",
+  "description": "SILVO TV - Il televisore vintage CRT con i 200 video più iconici di Silvio Berlusconi. 15 secondi per clip, autoplay continuo con audio nel browser, navigazione rigorosamente Solo Avanti.",
   "main": "index.html",
   "scripts": {
+    "build": "node build.js",
     "start": "python3 server.py",
-    "serve": "npx -y serve . -p 8080"
+    "serve": "npx -y serve . -p 8080",
+    "test": "node build.js && node -c app.js videos.js service-worker.js"
   },
   "keywords": [
     "silvio-berlusconi",
     "tv-vintage",
     "crt-player",
     "youtube-player",
-    "vanilla-js"
+    "vanilla-js",
+    "cloudflare-pages",
+    "pwa"
   ],
   "author": "Emanuele BDC",
   "license": "MIT"

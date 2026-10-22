@@ -5,6 +5,16 @@ Tutte le modifiche degne di nota a questo progetto saranno documentate in questo
 Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/),
 e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/).
 
+## [2.0.2] - 2026-10-22
+
+### Aggiunto
+- **Supporto Ufficiale Cloudflare Pages**: Aggiunto script di build `build.js` e script npm `"build": "node build.js"` per garantire la compilazione e distribuzione automatica su Cloudflare Pages a tolleranza zero.
+- **Configurazioni Cloudflare**: Aggiunti file `_headers` (caching PWA ottimizzato, `Permissions-Policy` per autoplay YouTube, sicurezza HTTP), `_redirects` e `wrangler.toml` (`pages_build_output_dir = "dist"`).
+- **Workflow CI/CD GitHub Actions**: Aggiunto `.github/workflows/cloudflare-pages.yml` per la verifica automatica della build statica e il deploy su Cloudflare Pages.
+
+### Modificato
+- **YouTube Iframe API Origin Security**: Aggiunto parametro `origin: window.location.origin` in `playerVars` in `app.js` per eliminare i warning `postMessage` e garantire l'affidabilità della riproduzione su domini Cloudflare Pages (`*.pages.dev`).
+
 ## [2.0.1] - 2026-10-07
 
 ### Modificato

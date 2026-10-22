@@ -291,6 +291,7 @@
           playsinline: 1,
           iv_load_policy: 3,
           enablejsapi: 1,
+          origin: (typeof window !== 'undefined' && window.location.origin && window.location.origin !== 'null') ? window.location.origin : undefined,
           start: this.currentVideo.startSeconds || 0
         },
         events: {

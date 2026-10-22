@@ -78,6 +78,31 @@ Open [http://localhost:8080](http://localhost:8080) in your mobile browser or Sa
 
 ---
 
+## ✦ Deploying to Cloudflare Pages
+
+SILVO TV is 100% pre-configured for instant deployment on **Cloudflare Pages**:
+
+### Option A: Cloudflare Dashboard (Connect to Git)
+1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) ➔ **Workers & Pages** ➔ **Create application** ➔ **Pages** ➔ **Connect to Git**.
+2. Select repository: **`emaf205/silvo-tv`** *(Note: repo is named `silvo-tv`)*.
+3. Configure the build settings:
+   - **Framework preset**: `None`
+   - **Build command**: `npm run build` *(or leave blank)*
+   - **Build output directory**: `dist` *(or `.` if build command is left blank)*
+   - **Root directory**: `/`
+4. Click **Save and Deploy**. Cloudflare Pages will build and publish your instance with global CDN caching and HTTPS.
+
+### Option B: Cloudflare CLI / Wrangler
+```bash
+# Build the static distribution
+npm run build
+
+# Deploy directly via Wrangler
+npx wrangler pages deploy dist --project-name=silvo-tv
+```
+
+---
+
 ## ✦ Author & Process
 
 Engineered by **[Emanuele BDC](https://emaf205.com)** in Milan.  

@@ -1,0 +1,40 @@
+name: ⚡ Cloudflare Pages CI & Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-verify:
+    name: 🔨 Verifica Build & Asset
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Configura Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🧪 Esegui Test & Build Statica
+        run: |
+          npm test
+
+      - name: ☁️ Deploy su Cloudflare Pages (se Secret configurati)
+        if: github.ref == 'refs/heads/main' && env.HAS_CF_SECRETS == 'true'
+        uses: cloudflare/pages-action@v1
+        env:
+          HAS_CF_SECRETS: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: silvo-tv
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
